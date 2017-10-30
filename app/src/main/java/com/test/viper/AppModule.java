@@ -7,6 +7,7 @@ import com.test.viper.entity.Article;
 import com.test.viper.entity.ArticleListProvider;
 import com.test.viper.screen.fragment.ChannelPresenter;
 import com.test.viper.screen.fragment.ContentPresenter;
+import com.test.viper.utils.LocationFormatter;
 
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class AppModule {
     @Provides
     ContentPresenter provideContentPresenter() {
         return new ContentPresenter();
+    }
+
+    @Provides
+    LocationFormatter provideLocationFormatter() {
+        return new LocationFormatter(app.getApplicationContext());
     }
 
     @Provides

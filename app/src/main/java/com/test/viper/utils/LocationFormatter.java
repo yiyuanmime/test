@@ -1,26 +1,26 @@
 package com.test.viper.utils;
 
-import android.content.res.Resources;
-import android.widget.TextView;
+import android.content.Context;
 
 import com.test.viper.R;
 
+import javax.inject.Inject;
+
 public class LocationFormatter {
 
-    private final TextView textView;
-    private final Resources resources;
+    private final Context context;
     private double LOWEST_LATITUDE_CANADA = 41.681389;
 
-    public LocationFormatter(TextView textView) {
-        this.textView = textView;
-        this.resources = textView.getResources();
+    @Inject
+    public LocationFormatter(Context context) {
+        this.context = context;
     }
 
-    public void showLocation(double latitude, double longitude) {
+    public String showLocation(double latitude, double longitude) {
         if (latitude >= LOWEST_LATITUDE_CANADA) {
-            textView.setText(resources.getString(R.string.yourPosition, String.valueOf(latitude), String.valueOf(longitude)));
+            return context.getString(R.string.yourPosition, String.valueOf(latitude), String.valueOf(longitude));
         } else {
-            textView.setText(resources.getString(R.string.error_locationNotSupported));
+            return context.getString(R.string.error_locationNotSupported);
         }
     }
 

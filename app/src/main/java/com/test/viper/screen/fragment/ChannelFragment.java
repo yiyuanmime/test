@@ -9,12 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
 import com.test.viper.App;
 import com.test.viper.R;
 import com.test.viper.adapter.ChannelAdapter;
+import com.test.viper.bus.AppBus;
+import com.test.viper.bus.event.LocationEvent;
 import com.test.viper.entity.Article;
 import com.test.viper.entity.ArticleListProvider;
+import com.test.viper.utils.LocationFormatter;
 
 import java.util.List;
 
@@ -36,6 +41,12 @@ public class ChannelFragment extends SupportFragment implements ChannelView {
     @BindView(R.id.recy)
     RecyclerView mRecy;
 
+    @BindView(R.id.location)
+    TextView location;
+
+    @Inject
+    LocationFormatter locationFormatter;
+
     @Inject
     ChannelPresenter channelPresenter;
 
@@ -52,12 +63,14 @@ public class ChannelFragment extends SupportFragment implements ChannelView {
         return fragment;
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.channel_fragment, container, false);
         ButterKnife.bind(this, view);
 
+        AppBus.registerContext(this);
         ((App) getActivity().getApplication()).getComponent().inject(this);
 
         initView();
@@ -71,6 +84,7 @@ public class ChannelFragment extends SupportFragment implements ChannelView {
     public void onDestroyView() {
         super.onDestroyView();
         channelPresenter.setView(null);
+        AppBus.unRegisterContext(this);
     }
 
     private void initView() {
@@ -105,6 +119,19 @@ public class ChannelFragment extends SupportFragment implements ChannelView {
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_channel_fragment));
                 break;
         }
+    }
+
+    @Subscribe
+    public void onLocationEvent(final LocationEvent event) {
+        switch (event.getmEventType()) {
+
+            case LOCATION_FOUND:
+                if (event.getLocation() != null)
+                    location.setText(locationFormatter.showLocation(event.getLocation().getLatitude(), event.getLocation().getLongitude()));
+                break;
+
+        }
+
     }
 
 }

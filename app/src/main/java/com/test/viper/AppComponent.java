@@ -1,5 +1,6 @@
 package com.test.viper;
 
+import com.test.viper.screen.activity.NewsActivity;
 import com.test.viper.screen.fragment.ChannelFragment;
 import com.test.viper.screen.fragment.ContentFragment;
 
@@ -16,4 +17,5 @@ import dagger.Component;
 public interface AppComponent {
     void inject(ChannelFragment channelFragment);
     void inject(ContentFragment contentFragment);
+    void inject(NewsActivity newsActivity);
 }

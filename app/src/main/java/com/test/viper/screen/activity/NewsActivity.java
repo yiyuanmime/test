@@ -10,13 +10,11 @@ import com.test.viper.bus.event.ChannelEvent;
 import com.test.viper.screen.fragment.ChannelFragment;
 import com.test.viper.screen.fragment.ContentFragment;
 
-import me.yokeyword.fragmentation.SupportActivity;
-
 /**
  * Created by yi on 29/10/2017.
  */
 
-public class NewsActivity extends SupportActivity {
+public class NewsActivity extends LocatedActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +23,6 @@ public class NewsActivity extends SupportActivity {
         if (findFragment(ChannelFragment.class) == null) {
             loadRootFragment(R.id.listContainer, ChannelFragment.newInstance());
         }
-
     }
 
     @Override
