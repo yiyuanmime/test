@@ -1,0 +1,12 @@
+<resources>
+    <bool name="isTablet">false</bool>
+
+    <string name="app_name">NuGlif Test</string>
+    <string name="action_sort">Trier</string>
+    <string name="yourPosition">Votre position: %1$s / %2$s </string>
+    <string name="error_locationNotSupported">Erreur, votre emplacement n&#8217;est pas supportée</string>
+    <string name="title_channel_fragment">News </string>
+    <string name="title_channel_fragment_sort_channel">News - sorted by channelName</string>
+    <string name="title_channel_fragment_sort_date">News - sorted by date</string>
+    <string name="title_content_fragment">News Content</string>
+</resources>
