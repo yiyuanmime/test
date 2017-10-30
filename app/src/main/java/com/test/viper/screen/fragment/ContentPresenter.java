@@ -9,15 +9,24 @@ import com.test.viper.service.response.NewsContentResponse;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by yi on 29/10/2017.
  */
 
 public class ContentPresenter extends BasePresenter<ContentView> {
 
+    private WebServiceProvider webServiceProvider;
+
+    @Inject
+    public ContentPresenter(WebServiceProvider webServiceProvider) {
+        this.webServiceProvider = webServiceProvider;
+    }
+
     public void getNewsContent(String id) {
 
-        WebServiceProvider.getInstance().getNewsContent(id, new NewsContentCallback() {
+        webServiceProvider.getNewsContent(id, new NewsContentCallback() {
 
             @Override
             public void onSuccess(NewsContentResponse newsContentResponse) {

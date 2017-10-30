@@ -1,20 +1,28 @@
 package com.test.viper.service;
 
+import com.test.viper.service.callback.NewsContentCallback;
+import com.test.viper.service.task.GetNewsContentTask;
+
+import javax.inject.Inject;
+
+import retrofit2.Retrofit;
+
 /**
  * Created by yi on 29/10/2017.
  */
 
-public class WebServiceProvider {
+public class WebServiceProvider implements IWebService {
 
-    private static IWebService instance;
+    private Retrofit baseAdapter;
 
-    public static IWebService getInstance() {
-
-        if (instance == null)
-            instance = new IWebServiceImpl();
-
-        return instance;
+    @Inject
+    public WebServiceProvider(Retrofit baseAdapter) {
+        this.baseAdapter = baseAdapter;
     }
 
+    @Override
+    public void getNewsContent(String id, NewsContentCallback newsContentCallback) {
+        GetNewsContentTask getWeatherTask = new GetNewsContentTask(baseAdapter, id, newsContentCallback);
+        getWeatherTask.doTask();
+    }
 }
-

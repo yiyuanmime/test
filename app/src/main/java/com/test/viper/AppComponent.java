@@ -3,6 +3,7 @@ package com.test.viper;
 import com.test.viper.screen.activity.NewsActivity;
 import com.test.viper.screen.fragment.ChannelFragment;
 import com.test.viper.screen.fragment.ContentFragment;
+import com.test.viper.service.WebModule;
 
 import javax.inject.Singleton;
 
@@ -13,7 +14,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = {AppModule.class, WebModule.class})
 public interface AppComponent {
     void inject(ChannelFragment channelFragment);
     void inject(ContentFragment contentFragment);

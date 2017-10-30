@@ -7,6 +7,7 @@ import com.test.viper.entity.Article;
 import com.test.viper.entity.ArticleListProvider;
 import com.test.viper.screen.fragment.ChannelPresenter;
 import com.test.viper.screen.fragment.ContentPresenter;
+import com.test.viper.service.WebServiceProvider;
 import com.test.viper.utils.LocationFormatter;
 
 import java.util.List;
@@ -38,8 +39,8 @@ public class AppModule {
     }
 
     @Provides
-    ContentPresenter provideContentPresenter() {
-        return new ContentPresenter();
+    ContentPresenter provideContentPresenter(WebServiceProvider webServiceProvider) {
+        return new ContentPresenter(webServiceProvider);
     }
 
     @Provides

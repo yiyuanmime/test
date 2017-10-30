@@ -2,6 +2,8 @@ package com.test.viper;
 
 import android.app.Application;
 
+import com.test.viper.service.WebModule;
+
 import me.yokeyword.fragmentation.Fragmentation;
 
 /**
@@ -14,6 +16,7 @@ public class App extends Application {
     public AppComponent getComponent() {
         return component;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,7 +26,9 @@ public class App extends Application {
                 .debug(true)
                 .install();
 
-        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
-
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .webModule(new WebModule())
+                .build();
     }
 }
